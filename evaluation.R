@@ -61,7 +61,7 @@ legend("topleft", col = 1:4, lwd = 2, c("measurements", "quadratic", "absolute",
 ###################################################
 
 
-qs <- function(pred, obs = test$p, tau = 0.4) {
+qs <- function(pred, obs = test$p, tau) {
     err <- pred-obs
     mean(err*((obs<=pred)-tau))
   }
@@ -75,9 +75,9 @@ quadratic = mean(abs(ols_pred-test$p)),
 absolute  = mean(abs(median_pred-test$p)),
 quantile  = mean(abs(quantile_pred-test$p))),
 QS = c(
-quadratic = qs(ols_pred),
-absolute  = qs(median_pred),
-quantile  = qs(quantile_pred))
+quadratic = qs(ols_pred,tau = 0.3),
+absolute  = qs(median_pred,tau = 0.3),
+quantile  = qs(quantile_pred,tau = 0.3))
 ) 
 errors <- round(errors, digits = 4)
 for(i in 1:3) errors[which.min(errors[,i]),i] <- paste0("\\textbf{", errors[which.min(errors[,i]),i], "}")
