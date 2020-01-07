@@ -29,7 +29,7 @@ test <- tail(data, -10000)
 if(file.exists("motivationmodels.rda")) {
   load("motivationmodels.rda")
 } else {
-  ols <- loess(p ~ ws100, train, span = 0.5)
+  ols <- loess(p ~ ws100, train, span = 0.5, degree = 1)
   median <- with(train, lprq(ws100, p, h = 1, tau=0.5))
   quantile <- with(train, lprq(ws100, p, h = 1, tau=0.3))
   
