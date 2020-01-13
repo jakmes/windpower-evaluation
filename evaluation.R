@@ -16,6 +16,12 @@ plot(a, a*(0.3-(a<0)), type = "l", xlab = expression(epsilon), ylab = expression
 ###################################################
 library("xtable")
 library("quantreg")
+## The full GEFCom2014 data set is available as appendix to 
+# Hong T, Pinson P, Fan S, Zareipour H, Troccoli A, Hyndman RJ. "Probabilistic Energy Forecasting: 
+# Global Energy Forecasting Competition 2014 and Beyond". International Journal of Forecasting 2016; 32(3): 896-913. 
+# doi:10.1016/j.ijforecast.2016.02.001 
+# or at https://www.dropbox.com/s/pqenrr2mcvl0hk9/GEFCom2014.zip?dl=0
+## The subset that we use in the following is also contained in this git repository
 data <- read.csv("Task15_W_Zone1_10/Task15_W_Zone1.csv")
 names(data) <- c("zone_id", "timestamp", "p", "u10", "v10", "u100", "v100")
 data$ws10 <- with(data, sqrt(u10^2 + v10^2))
