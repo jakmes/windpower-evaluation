@@ -1,6 +1,9 @@
 ###############################
-## Suplementary material for Section 4.4 of "Evaluation of Wind Power Forecasts - An up-to-date view" by Jakob W. Messner, Pierre Pinson, Jethro Browell, MathiasB Bjerregard, and Irene Schicker.
+## Suplementary material for Section 4.4 of "Evaluation of Wind Power Forecasts - An up-to-date view" by Jakob W. Messner, 
+## Pierre Pinson, Jethro Browell, MathiasB Bjerregard, and Irene Schicker.
 ## Author: Jethro Browell (jethro.browell@strath.ac.uk)
+## Encoding: UTF-8
+## License: GPL-3
 ###############################
 
 ## Load required packages
@@ -17,7 +20,10 @@ set.seed(1)
 
 ## Load and prepare data ####
 # 
-# A subset of data from GEFcom2014 is used. Originally published here: Tao Hong, Pierre Pinson, Shu Fan, Hamidreza Zareipour, Alberto Troccoli, Rob J. Hyndman, "Probabilistic energy forecasting: Global Energy Forecasting Competition 2014 and beyond", International Journal of Forecasting,Volume 32, Issue 3,2016,Pages 896-913,ISSN 0169-2070,https://doi.org/10.1016/j.ijforecast.2016.02.001
+# A subset of data from GEFcom2014 is used. Originally published here: Tao Hong, Pierre Pinson, Shu Fan, 
+# Hamidreza Zareipour, Alberto Troccoli, Rob J. Hyndman, "Probabilistic energy forecasting: Global Energy Forecasting 
+# Competition 2014 and beyond", International Journal of Forecasting,Volume 32, Issue 3,2016,Pages 896-913,ISSN 0169-2070,
+# https://doi.org/10.1016/j.ijforecast.2016.02.001
 
 data <- read.csv("Task15_W_Zone1_10/Task15_W_Zone1.csv")
 names(data) <- c("zone_id", "timestamp", "p", "u10", "v10", "u100", "v100")
