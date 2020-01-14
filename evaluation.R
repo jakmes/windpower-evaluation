@@ -17,7 +17,7 @@ plot(a, a^2, type = "l", xlab = expression(epsilon), ylab = expression(rho(epsil
 plot(a, abs(a), type = "l", xlab = expression(epsilon), ylab = expression(rho(epsilon)))
 plot(a, a*(0.3-(a<0)), type = "l", xlab = expression(epsilon), ylab = expression(rho(epsilon)), ylim = c(0,4))
 
-
+par(mfrow = c(1,1))
 ###################################################
 ### code chunk number 2: Load data, fit models and plot Figure 2
 ###################################################
@@ -29,7 +29,7 @@ library("quantreg")
 # doi:10.1016/j.ijforecast.2016.02.001 
 # or at https://www.dropbox.com/s/pqenrr2mcvl0hk9/GEFCom2014.zip?dl=0
 ## The subset that we use in the following is also contained in this git repository
-data <- read.csv("Task15_W_Zone1_10/Task15_W_Zone1.csv")
+data <- read.csv("Task15_W_Zone1.csv")
 names(data) <- c("zone_id", "timestamp", "p", "u10", "v10", "u100", "v100")
 data$ws10 <- with(data, sqrt(u10^2 + v10^2))
 data$ws100 <- with(data, sqrt(u100^2 + v100^2))
@@ -84,13 +84,13 @@ quadratic = qs(ols_pred,tau = 0.3),
 absolute  = qs(median_pred,tau = 0.3),
 quantile  = qs(quantile_pred,tau = 0.3))
 ) 
-errors <- round(errors, digits = 4)
+errors <- round(100*errors, digits = 2)
 
 ## highlight best model
 for(i in 1:3) errors[which.min(errors[,i]),i] <- paste0("\\textbf{", errors[which.min(errors[,i]),i], "}")
 
 ## output latex table
-latextab <- xtable(errors, digits = 4, label = "tab:motivationscores", caption = "Different evaluation measures for the three local linear models with quadratic, absolute and quantile loss function. The best model for each score is highlighted in bold")
+latextab <- xtable(errors, digits = 2, label = "tab:motivationscores", caption = "Different evaluation measures for the three local linear models with quadratic, absolute and quantile loss function. The best model for each score is highlighted in bold")
 print(latextab, , sanitize.text.function=identity)
 
 
@@ -111,11 +111,11 @@ quadratic = mean(abs(ols_pred[ind]-testshort$p)),
 absolute  = mean(abs(median_pred[ind]-testshort$p)),
 quantile  = mean(abs(quantile_pred[ind]-testshort$p))),
 QS = c(
-quadratic = qs(ols_pred[ind], testshort$p),
-absolute  = qs(median_pred[ind], testshort$p),
-quantile  = qs(quantile_pred[ind], testshort$p))
+quadratic = qs(ols_pred[ind], testshort$p,tau = 0.3),
+absolute  = qs(median_pred[ind], testshort$p,tau = 0.3),
+quantile  = qs(quantile_pred[ind], testshort$p,tau = 0.3))
 ) 
-errors <- round(errors, digits = 4)
+errors <- round(100*errors, digits = 4)
 
 ## highlight best model
 for(i in 1:3) errors[which.min(errors[,i]),i] <- paste0("\\textbf{", errors[which.min(errors[,i]),i], "}")
@@ -250,7 +250,7 @@ for(i in 1:10) {
 
 boxplot(MSE, ylab = "mean squared error", ylim = c(0.01, 0.1))
 
-
+par(mfrow = c(1,1))
 
 ###################################################
 ### code chunk number 13:Figure 11
